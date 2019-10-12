@@ -109,7 +109,7 @@ public class NetUtil {
 //            String key="__uino_ecp_";
 //            String fileName="._unio_ecp_";
 //            String uuid = SharedPreferencesHelper.getInstance().getString(key, null);
-//            if (CommHelper.checkNull(uuid)) {
+//            if (CommonUtil.checkNull(uuid)) {
 //                byte[] data = FileHelper.readFile(EnvironmentHelper.getSdcardDir().getAbsolutePath() + File.separator+fileName);
 //                if (data==null){
 //                    StringBuilder time=new StringBuilder();
@@ -120,7 +120,7 @@ public class NetUtil {
 //                        byte a=(byte)((byte) ((Math.random()*255)+1) &0xff);
 //                        buffer[i]=a;
 //                    }
-//                    time.append(CommHelper.hexEncode(buffer));
+//                    time.append(CommonUtil.hexEncode(buffer));
 //                    FileHelper.bytes2File(EnvironmentHelper.getSdcardDir().getAbsolutePath(),fileName,time.toString().getBytes("utf-8"),false);
 //                    SharedPreferencesHelper.getInstance().put(key,time.toString());
 //                    return time.toString();
@@ -227,7 +227,7 @@ public class NetUtil {
 
     /** 检查传入字段是否为规范的点分十进制的IP */
     public static boolean isValidIP(String addr) {
-        if (CommHelper.checkNull(addr)) {
+        if (CommonUtil.checkNull(addr)) {
             return false;
         }
         Pattern pattern = Pattern
@@ -239,7 +239,7 @@ public class NetUtil {
     /** DNS解析传入的域名字段，返回解析之后的IP地址 */
     public static String resolveDNS(String hostName) throws Exception {
         try {
-            if (!CommHelper.checkNull(hostName)) {
+            if (!CommonUtil.checkNull(hostName)) {
                 return InetAddress.getByName(hostName).getHostAddress();
             }
         } catch (Exception e) {
@@ -250,7 +250,7 @@ public class NetUtil {
 
     public static String getHostName(String host) {
         try {
-            if (!CommHelper.checkNull(host)) {
+            if (!CommonUtil.checkNull(host)) {
                 return InetAddress.getByName(host).getHostName();
             }
         } catch (Exception e) {
@@ -261,7 +261,7 @@ public class NetUtil {
     }
 
     public static boolean compareIpAddress(String baseAddress, String secondAddress) {
-        if (CommHelper.checkNull(baseAddress) || CommHelper.checkNull(secondAddress)) {
+        if (CommonUtil.checkNull(baseAddress) || CommonUtil.checkNull(secondAddress)) {
             return false;
         }
         // try {
@@ -294,8 +294,8 @@ public class NetUtil {
 //	/** DNS解析传入的域名字段，返回解析以后的IP地址列表 */
 //	public static List<String> searchIps(String domainName, String serverIp)throws Exception {
 //		List<String> ips = new ArrayList<String>();
-//		if ((!CommHelper.checkNull(serverIp) && isValidIP(serverIp))
-//				&&!CommHelper.checkNull(domainName)) {
+//		if ((!CommonUtil.checkNull(serverIp) && isValidIP(serverIp))
+//				&&!CommonUtil.checkNull(domainName)) {
 //			Lookup lookup = new Lookup(domainName, Type.A, DClass.IN);
 //			lookup.setResolver(new SimpleResolver(serverIp));
 //			lookup.run();
@@ -305,7 +305,7 @@ public class NetUtil {
 //					try {
 //						String ip = ((ARecord) record).getAddress()
 //								.getHostAddress();
-//						if ((CommHelper.checkNull(ip) && isValidIP(ip))) {
+//						if ((CommonUtil.checkNull(ip) && isValidIP(ip))) {
 //							ips.add(ip);
 //						}
 //					} catch (Exception e) {

@@ -23,7 +23,7 @@ public class EncryptUtil {
         try {
             byte[] bytes = MessageDigest.getInstance("MD5").digest(
                     str.getBytes(Charset.defaultCharset()));
-            return CommHelper.hexEncode(bytes);
+            return CommonUtil.hexEncode(bytes);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -35,7 +35,7 @@ public class EncryptUtil {
         try {
             byte[] bytes = MessageDigest.getInstance("SHA-256").digest(
                     str.getBytes(Charset.defaultCharset()));
-            return CommHelper.hexEncode(bytes).toLowerCase();
+            return CommonUtil.hexEncode(bytes).toLowerCase();
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -53,7 +53,7 @@ public class EncryptUtil {
     public static String encode3DES(Context context, String data){
         try {
             byte[] ret = encryptDESede(get3desKey(context), data.getBytes("utf-8"));
-            return CommHelper.hexEncode(ret);
+            return CommonUtil.hexEncode(ret);
         }catch (Exception e){
             e.printStackTrace();
             return null;
@@ -62,7 +62,7 @@ public class EncryptUtil {
 
     public static String decode3DES(Context context, String data){
         try {
-            byte[] ret = decryptDESede(get3desKey(context), CommHelper.hexDecode(data));
+            byte[] ret = decryptDESede(get3desKey(context), CommonUtil.hexDecode(data));
             return new String(ret,"utf-8");
         }catch (Exception e){
             e.printStackTrace();

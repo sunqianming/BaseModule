@@ -4,18 +4,17 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
 import android.os.SystemClock;
-import android.telephony.TelephonyManager;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ListAdapter;
@@ -37,21 +36,7 @@ import java.util.List;
  * @author SQM
  * @Description:基础公共类
  */
-public class CommHelper {
-
-    /***
-     * 获取颜色
-     * @param context
-     * @param resId
-     * @return
-     */
-    public static int getColor(Context context, int resId) {
-        if (Build.VERSION.SDK_INT >= 23) {
-            return context.getResources().getColor(resId, null);
-        } else {
-            return context.getResources().getColor(resId);
-        }
-    }
+public class CommonUtil {
 
     public static int getAppVersionCode(Context context) {
         try {
@@ -74,23 +59,6 @@ public class CommHelper {
             e.printStackTrace();
         }
         return name;
-    }
-
-    /***
-     * 设置状态栏颜色
-     * @param context
-     * @param color
-     */
-    public static void setWindowStatusBarColor(Activity context, int color) {
-        try {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                Window window = context.getWindow();
-                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-                window.setStatusBarColor(color);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     /***
@@ -244,44 +212,39 @@ public class CommHelper {
         listView.requestLayout();
     }
 
+
     /***
+     * 获取颜色
+     * @param context
+     * @param resId
+     * @return
+     */
+    public static int getColor(Context context, int resId) {
+        if (Build.VERSION.SDK_INT >= 23) {
+            return context.getResources().getColor(resId, null);
+        } else {
+            return context.getResources().getColor(resId);
+        }
+    }
+
+    /**
+     * 获取字符串
      *
-     * @Title: getString
-     * @Description: 获取字符串
-     * @param @param context
-     * @param @param strId
-     * @param @return 参数
-     * @return String 返回类型
-     * @author huangyc
-     * @date 2014-10-16 上午11:09:40
+     * @param context
+     * @param strId
+     * @return
      */
     public static String getString(Context context, int strId) {
         return context.getString(strId);
     }
 
-    /***
+    /**
+     * 获取字符串
      *
-     * @Title: getString
-     * @Description: 获取字符串
-     *               <p>
-     *               String tiptext
-     *               =getString(R.string.format_error,"用户名","昵称","密码");
-     *
-     *               strings.xml 中 format_error 为：
-     *
-     *               <string name="format_error">请使用%1$s:%2$s:%3$s的格式</string>
-     *
-     *               返回结果： tiptext ="请使用用户名:昵称:密码的格式";
-     *               </p>
-     *
-     *
-     * @param @param context
-     * @param @param strId
-     * @param @param params
-     * @param @return 参数
-     * @return String 返回类型
-     * @author huangyc
-     * @date 2014-10-16 上午11:11:11
+     * @param context
+     * @param strId
+     * @param params
+     * @return
      */
     public static String getString(Context context, int strId, Object... params) {
         return context.getString(strId, params);
@@ -483,4 +446,32 @@ public class CommHelper {
         bitmap.recycle();
         return true;
     }
+
+    /**
+     * 拨打电话
+     *
+     * @param context context
+     * @param tel     电话号码
+     */
+    public static void call(Context context, String tel) {
+        Intent intent = new Intent(Intent.ACTION_DIAL);
+        intent.setData(Uri.parse("tel:" + tel));
+        context.startActivity(intent);
+    }
+
+    /**
+     * 通知相册更新
+     *
+     * @param context
+     * @param filePath
+     * @describe 拍照后，为了在相册中能够看到所拍照片，需要刷新
+     */
+    public static void refreshPhotoAlbum(Context context, String filePath) {
+        File file = new File(filePath);
+        Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+        Uri uri = Uri.fromFile(file);
+        intent.setData(uri);
+        context.sendBroadcast(intent);
+    }
+
 }

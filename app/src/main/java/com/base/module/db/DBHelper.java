@@ -1,23 +1,15 @@
 package com.base.module.db;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.base.module.util.CommHelper;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.lang.reflect.Field;
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Vector;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -262,7 +254,7 @@ public class DBHelper extends SQLiteOpenHelper {
 //            }
 //            String SQL = "create table if not exists  ";
 //            String tableName = e.tableName();
-//            if (CommHelper.checkNull(tableName)) {
+//            if (CommonUtil.checkNull(tableName)) {
 //                tableName = entity.getSimpleName();
 //            }
 //            Field fields[] = entity.getDeclaredFields();
@@ -603,7 +595,7 @@ public class DBHelper extends SQLiteOpenHelper {
 //            if (pageSize != null) {
 //                v_limit += "" + pageSize;
 //            }
-//            if (CommHelper.checkNull(v_limit)) {
+//            if (CommonUtil.checkNull(v_limit)) {
 //                v_limit = null;
 //            }
 //            c = r_db.query(tableName, cols.toArray(new String[]{}), where, params, groupBy, having, orderBy, v_limit);
@@ -704,7 +696,7 @@ public class DBHelper extends SQLiteOpenHelper {
 //        for (Field f : fs) {
 //            HDColumn column = f.getAnnotation(HDColumn.class);
 //            String colName = "";
-//            if (column == null || CommHelper.checkNull(column.name())) {
+//            if (column == null || CommonUtil.checkNull(column.name())) {
 //                colName = f.getName();
 //            } else {
 //                colName = column.name();
@@ -786,7 +778,7 @@ public class DBHelper extends SQLiteOpenHelper {
 //                continue;
 //            }
 //            HDColumn column = f.getAnnotation(HDColumn.class);
-//            if (column == null || CommHelper.checkNull(column.name())) {
+//            if (column == null || CommonUtil.checkNull(column.name())) {
 //                idName = f.getName();
 //            } else {
 //                idName = column.name();
@@ -816,7 +808,7 @@ public class DBHelper extends SQLiteOpenHelper {
 //            return null;
 //        }
 //        String tableName = e.tableName();
-//        if (CommHelper.checkNull(tableName)) {
+//        if (CommonUtil.checkNull(tableName)) {
 //            tableName = entity.getSimpleName();
 //        }
 //        return tableName;

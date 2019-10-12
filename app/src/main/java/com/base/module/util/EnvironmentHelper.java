@@ -281,7 +281,7 @@ public class EnvironmentHelper {
      * @date 2014-9-25 下午6:25:03
      */
     public static void setAppHomeDir(String paramString) {
-        if (CommHelper.checkNull(paramString)) {
+        if (CommonUtil.checkNull(paramString)) {
             return;
         }
         appHomeDir = paramString;
